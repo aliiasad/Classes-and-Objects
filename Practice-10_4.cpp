@@ -28,7 +28,7 @@ class Student {
         char* name;
         int age;
     public:
-        Student(const char* n = "Unknown", int age = 0);  // ✅ defaults HERE
+        Student(const char* n = "Unknown", int age = 0);
         Student(const Student& other);
         ~Student();
         Student& operator=(const Student& other);
