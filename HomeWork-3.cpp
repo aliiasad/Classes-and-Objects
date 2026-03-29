@@ -1,4 +1,5 @@
 # include <iostream>
+# include <string>
 using namespace std;
 
 int len(const char* str);
@@ -46,6 +47,7 @@ class MyString {
         MyString();
         MyString(const char*);
         MyString(const MyString&);
+        MyString(MyString&&); // move constructor
         ~MyString();
 
         // predefined
@@ -74,6 +76,13 @@ MyString::MyString(const char* s) {
 MyString :: MyString(const MyString& dummy) {
     str = dynamic_cpy(dummy.str);
     length = dummy.length;
+}
+
+MyString :: MyString(MyString&& dummy)  {
+    str = dummy.str;
+    length = dummy.length;
+    dummy.str = nullptr;
+    dummy.length = 0;
 }
 
 MyString :: ~MyString() {
@@ -139,7 +148,7 @@ char& MyString :: operator[](int idx)   {
     return str[idx];
 }
 
-bool MyString::operator<(MyString dummy) {
+bool MyString :: operator<(MyString dummy) {
     int i = 0;
     while (str[i] != '\0' && dummy.str[i] != '\0') {
         if (str[i] < dummy.str[i]) return true;
